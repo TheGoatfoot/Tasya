@@ -1,12 +1,17 @@
 version: 2.1
 orbs:
   rust: circleci/rust@1.6.0
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - rust/build:
+          release: true 
+          with_cache: false 
+      - store_artifacts:
+          path: ~/target/release
 workflows:
-  production:
+  example-workflow:
     jobs:
-      - rust/lint-test-build:
-          release: true
-build:
-  - store_artifacts:
-        path: ~/target/release
-        destination: artifact-file
+      - build
