@@ -6,3 +6,7 @@ workflows:
     jobs:
       - rust/lint-test-build:
           release: true
+build:
+  - store_artifacts:
+        path: ~/target/release
+        destination: artifact-file
